@@ -1,0 +1,30 @@
+Goals: 
+
+Create new xml file from uploaded xlsx file
+
+Edit Teacher and Room pages with updated information (including deleting pages of teachers who don't work here anymore)
+
+Fix everything in /clusters/ folder (class pages and cluster pages) to reflect the changing of teachers*
+
+Teachers
+-Classes taught
+-Subjects Taught**
+-Rooms taught in**
+-Google Doc link
+
+Rooms
+-Classes taught in
+-Teachers taught in
+
+
+Edit Subject Clusters with updated information
+
+&& Email Admins with changes
+
+
+
+
+
+*Not subjectsm because all of the information from this tool comes from a term schedule of all of the teachers, and not every class is taught every term
+
+**We can't derive all of the classes each teacher teaches from the file we currently have
