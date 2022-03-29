@@ -18,7 +18,7 @@
    </h1>
   </div>
   <div class="w3-container w3-left">
-   <h3 id="subject">Subjects: English, Math, Science, Social Studies</h3>
+   <h3 id="subject">Subjects: Math</h3>
    <h3 id="classes">Classes: Algebra 1</h3>
    <h3 id="rooms">Rooms: 314</h3>
    <h3 id="email">

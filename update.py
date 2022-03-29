@@ -9,7 +9,7 @@ import json
 from bs4 import BeautifulSoup
 import lxml
 
-
+error = []#this will collect any errors that happens
 filenames = []
 teachernames = []
 
@@ -126,15 +126,62 @@ while i <= max_rows:
 
         #---------Subejcts
         tag = (soup.find(id='subjects'))#Finds h3 with id: subjects
-        subjects_master_list = [""]
-        build_subjects = subjects[0]#Starting the loop off with first item
-        r = 1
-        while r<len(subjects):#couldn't get a for loop to work
-          build_subjects = build_subjects+", "+subjects[r]#Concated each item to variable passed form last loop through
-          r = r+1
-    
-        subject_string = '<h3 id="subject">Subjects: '+build_subjects+'</h3>'
-        tag.replace_with(subject_string)
+        #These are lists of all of the classes. If a class is in one of the lists, the subject is the one corresponding to that list
+        #make testing class lowercase, classes in subject lists are all lowercase
+      
+        #If a class comes in that is unrecognized or spelled differently or is a little different from the official name, just add it into the list so in the future when it comes back agin it can be recognized
+        
+        arts = ["acting 1", "putting on a show", "film acting", "music theatre", "theatre arts", "ib theatre", "advanced acting 2", "advanced acting 3", "advanced acting 4", "school of rock", "choraliers", "concert choir", "treble choir", "ib music sl", "concert band", "symphonic band", "wind symphony", "orchestra", "drawing 1", "painting 1", "sculpture 1", "ceramics 1", "digital photography 1", "digital art", "advanced digital art", "industrial design", "advertising and design", "ap art and design", "advanced sculpture and ceramics 1", "advanced sculpture and ceramics 2", "advanced sculpture and ceramics 3", "advanced photography 2", "advanced photography 3", "design challenge", "advanced drawing and painting 2", "advanced drawing and painting 3"]
+        english = ["english 9", "english 10", "acc english 10", "acc english 9", "english 11", "ap english language and composition", "ib english hl", "ib english 2 hl", "english 12", "ap english literature and composition", "intercultural communication", "contemporary nonfiction", "creative writing", "literature and film theory", "seminar digital communications", "ib extended essay", "digital productions"]
+        math = ["algebra 1", "geometry", "acc geometry", "trades math", "algebra 2", "acc algebra 2", "college algebra", "precalculus", "ib math sl", "introduction to statistics", "ap statistics", "ap statistics ab", "ap statistics bc", "pie calculus 3", "mathematics in global issues"]
+        business = ["career internship", "career portfolio", "education internship", "finance youth apprenticeship", "hospitality youth apprenticeship", "hsb business economics", "hsb business strategies", "hsb principles of business", "hsb principles of finance", "hsb principles managment", "hsb principles marketing", "ib personal and professional skills 1", "ib personal and professional skills 2", "intro to accounting", "marketing youth apprenticeship", "personal finance", "tc social media marketing", "sports and entertainment marketing", "tc college accounting", "tc hospitality", "tc microsoft word and powerpoint", "tc microsoft excel and quickbooks", "tc web design", "yearbook"]
+        computerscience = ["elements of game design", "computer science discoveries", "ap computer science principles", "ap computer science", "ap computer science a", "tc programming for the web", "tc mobile app development", "tech internship"]
+        language = ["chinese 1", "chinese 2", "chinese 3", "chinese 4", "chinese 5", "ib chinese sl 1", "ib chinese sl 2", "french 1", "french 2", "french 3", "french 4", "ib french sl", "german 1", "german 2", "german 3", "german 4", "german 5", "ib german sl 1", "ib german sl 2", "ib german hl", "spanish 1", "spanish 2", "spanish 3", "spanish 4", "spanish 5", "ib spanish sl 1", "ib spanish hl 1", "ib spanish sl 2", "ib spanish hl 2", "global sustainability"]
+        physicalfitness = ["health", "broadfield", "team and individual", "wellness watch", "lifetime pursuits", "dance", "weight training", "advanced fitness", "officiating", "intrduction to leadership"]
+        science = ["biology", "chemistry", "acc chemistry", "physics", "earth and space science", "ap chemistry", "ap chem", "ap physics 1", "ap physics c", "ap environmental science", "ib biology hl 1", "ib biology hl 2", "ib chemistry hl 1", "ib chemistry hl 2", "ib physics sl", "ib physics", "pltw human body", "pltw human body systems", "pltw human body interventions", "pltw biological innovations", "global sustainability"]
+        teched = ["building trades 1", "building trades 2", "building trades 3", "digital productions", "oconmanufacturing", "oconmanufacturing 1", "oconmanufacturing 2", "advanced welding", "intro to engineering", "intro to engineering design", "introduction to engineering design", "principles of engineering", "civil engineering and architecture", "digital electronics", "computer integrated manufacturing", "engineering design and development", "oconfablab", "industrial design", "consumer auto", "auto 1", "auto", "auto 2", "auto 3"]
+        socialstudies = ["humanities 9", "modern world history", "ap human geography", "united states history", "sociology", "ap us history", "ap world history", "ap workd", "ap workd history: modern", "citizenship", "ap american government and politics", "the law", "ap psychology", "aconomics", "psychology", "ib economics sl 1", "ib history of the americas hl 1", "ib history of the americas hl 2", "ib history of the americas", "ib theory of knowledge", "ib theory of knowledge hl 1", "ib theory of knowledge hl 2", "ap seminar", "cin", "ap seminar/cin"]
+        for qqq in classes:
+          qqq = qqq.lower()
+          
+          if "student services" in qqq and "Student Services" not in subjects:
+            subjects.append("Student Services")
+          if qqq in socialstudies and "Social Studies" not in subjects:
+            subjects.append("Social Studies")
+          if qqq in science and "Science" not in subjects:
+            subjects.append("Science")
+          if qqq in teched and "Technology Education" not in subjects:
+            subjects.append("Technology Education")
+          if qqq in physicalfitness and "Physical Fitness" not in subjects:
+            subjects.append("Physical Fitness")
+          if qqq in language and "World Language" not in subjects:
+            subjects.append("World Language")
+          if qqq in computerscience and "Computer Science" not in subjects:
+            subjects.apppend("Computer Science")
+          if qqq in business and "Business" not in subjects:
+            subjects.append("Business")
+          if qqq in math and "Math" not in subjects:
+            subjects.append("Math")
+          if qqq in english and "English" not in subjects:
+            subjects.append("English")
+          if qqq in arts and "Arts" not in subjects:
+            subjects.append("Arts")
+          if qqq not in arts and qqq not in socialstudies and qqq not in science and qqq not in teched and qqq not in physicalfitness and qqq not in language and qqq not in computerscience and qqq not in business and qqq not in math and qqq not in english and "student services" not in qqq:
+            print(error)
+            terror = ("Unknown class:  "+qqq)
+            error.append(terror)
+
+        if subjects:
+          build_subjects = subjects[0]#Starting the loop off with first item
+          r = 1
+          while r<len(subjects):#couldn't get a for loop to work
+            build_subjects = build_subjects+", "+subjects[r]#Concated each item to variable passed form last loop through
+            r = r+1
+      
+          subject_string = '<h3 id="subject">Subjects: '+build_subjects+'</h3>'
+          tag.replace_with(subject_string)
+        else:
+          tag.replace_with('<h3 id="subject"></h3>')
         #---------Classes
     
         tag = (soup.find(id='classes'))
@@ -164,13 +211,6 @@ while i <= max_rows:
     
           f_output.write(soup.prettify(formatter=None)) 
         
-    
-      
-
-
-
-
-
 
   i = i+1
   
@@ -179,3 +219,4 @@ print("filename", filenames)
 print("teachernames", teachernames)
 
 
+print(error)
